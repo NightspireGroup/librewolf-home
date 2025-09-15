@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Custom New Tab</title>
+  <title>Home</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@100;300&display=swap');
     *{margin:0;padding:0;box-sizing:border-box}
@@ -27,17 +28,17 @@
       backdrop-filter:blur(12px);
       background:rgba(255,255,255,0.2);
       border-radius:50px;
-      padding:0.2em 1em;
+      padding:0.4em 1em;
       width:50%;max-width:600px;min-width:280px;
       box-shadow:0 4px 20px rgba(0,0,0,0.3);
     }
     .search-container input{
       flex:1;background:transparent;border:none;outline:none;
-      font-size:1em;color:black;
+      font-size:1.1em;color:black;
     }
     .search-container button{
       background:none;border:none;cursor:pointer;
-      font-size:1.2em;color:black;
+      font-size:1.3em;color:black;
     }
     .ip{
       position:fixed;bottom:15px;left:20px;
@@ -51,8 +52,8 @@
   <div class="time" id="time"></div>
   <div class="date" id="date"></div>
   <div class="search-container">
-    <input type="text" id="searchBox" placeholder="Search Google...">
-    <button onclick="doSearch()">&#128269;</button>
+    <input type="text" id="searchBox">
+    <button onclick="doSearch()"><i class="fas fa-search"></i></button>
   </div>
   <div class="ip" id="ip">Loading IP...</div>
   <script>
@@ -62,9 +63,8 @@
       let mins=String(now.getMinutes()).padStart(2,'0');
       let ampm=now.getHours()>=12?"PM":"AM";
       document.getElementById("time").textContent=`${hrs}:${mins} ${ampm}`;
-      let options={weekday:"long",year:"numeric",month:"long",day:"numeric"};
-      let [weekday,month,day,year]=now.toLocaleDateString("en-US",options).split(" ");
-      document.getElementById("date").textContent=`${weekday.replace(",","")}, ${month} ${day.replace(",","")}`;
+      let options={weekday:"long",month:"long",day:"numeric"};
+      document.getElementById("date").textContent=now.toLocaleDateString("en-US",options);
     }
     setInterval(updateTime,1000);updateTime();
     function doSearch(){
